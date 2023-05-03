@@ -224,18 +224,19 @@ namespace T9Texting
                             // Trying because there may be a key not found error
                             newText += letterMappings[numSet];  
                         } catch {
-                            if (numSet != " " && numSet != "*" && numSet != "  "){
-                            Globals.Unaccepted(numSet);
-                        }
+                            // if (numSet != " " && numSet != "*" && numSet != "  "){
+                            //     Globals.Unaccepted(numSet);
+                            // }
+                            continue;
                         }
                     }
                 } else {
                     try {
                         newText += letterMappings[input];
                     } catch {
-                        if (input != " " && input != "*" && input != "  "){
-                            Globals.Unaccepted(input);
-                        }
+                        // if (input != " " && input != "*" && input != "  "){
+                            // Globals.Unaccepted(input);
+                        // }
                         continue;
                     }
                 }  
