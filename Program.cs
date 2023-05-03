@@ -1,5 +1,5 @@
 ﻿public static class Globals {
-    public static string msg = "Please Provide Your T9 Input or press (x) to finish";
+    public static string msg = "Please Provide Your T9 Input: ";
 
     public static void Unaccepted(string text){
         Console.WriteLine($"The Text {text} Given Was Unaccepted");
@@ -13,7 +13,7 @@
 
 namespace T9Texting
 {
-    class Program
+    class Program2
     {
         static void Main(string[] args)
         {
@@ -53,46 +53,45 @@ namespace T9Texting
                 // The way I understand this is something akin to javascript events so when enter is pressed it 
                 // also affects the GetUserInput function and starts the loop over again with the continue statement.
                 {
-                    Console.WriteLine("Output: " + currentWord);
                     currentWord = "";
                     t9Input = "";
                     continue;
                 }
 
                 string[] data = GetUserInput(currentNumBeingUsed);
-                // So GetUserInput Returns Two Things In the form of a string array
-                // I did not make the variable static in the function nor would I want to
-                // So I must change the variable here as well to reflect actual changes
-                // Before sending it back to the function the next time around.
+
                 t9Input = data[0].ToString();
 
                 if (currentNumBeingUsed != data[1]){
                     if (data[1] == "null"){
                         break;
                     }
-                    
+                    // So GetUserInput Returns Two Things
+                    // I did not make the variable static in the function nor would I want to
+                    // So I must change the variable here to reflect actual changes
+                    // Before sending it back to the function the next time around.
                     currentNumBeingUsed = data[1].ToString();
                 }
                 
-                Console.WriteLine($"t9Input = {t9Input}");
                 if (t9Input == "#" || t9Input == " " || t9Input == ""){
                     // This condition just checks to see if the user simply tried sending an empty message
                     continue;
                 } else {
                     string[] t9Inputs = t9Input.Split(" ");
                     int t9InputsLength = t9Inputs.Length;
-                    // SplitAndCheckText Basically Just looks to see if there are any '-'s and if so it will remove them
-                    // And then pull the appropriate letter from letterMappings.
                     currentWord += SplitAndCheckText(t9Inputs, "-", letterMappings);
                 }
-                Console.WriteLine("Current Word: ");
-                Console.WriteLine(currentWord);
+                Console.WriteLine($"Current Word: {currentWord}");
                 allWords += " " + currentWord;
                 currentWord = "";
 
             }
-            Console.WriteLine("All Words: ");
-            Console.WriteLine(allWords);
+            Console.WriteLine($"All Words: {allWords}");
+        }
+
+        static long TimeSinceLastInput(string input)
+        {
+            return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - DateTimeOffset.Parse(input.Substring(1)).ToUnixTimeMilliseconds();
         }
 
         static string[] GetUserInput(string currentNumBeingUsed){
@@ -100,8 +99,8 @@ namespace T9Texting
             System.Timers.Timer timer = new (interval: 1000 );
 
             void handleTimeElapsed(){
-                Console.WriteLine("Adding a Space--------------");
                 words += " ";
+                timer.Stop();
             };
 
             timer.Elapsed += (sender, e) => {handleTimeElapsed();};
@@ -130,7 +129,6 @@ namespace T9Texting
                     // so at worst the efficiency is equal but at least this way the logic is consistent.
                     timer.Stop();
                 }
-                timer.Stop();
                 string currentString = currentChar.ToString();       
                 if (char.IsDigit(currentChar)){
                     // First type verification we need numbers and not anything else other than
@@ -150,9 +148,10 @@ namespace T9Texting
                             set to an empty string hence the reason for (currentNumBeingUsed != "")
                         */
 
-                        removeCounter = 1;
+                        
                         currentNumBeingUsed = currentString;
                         words += "-";
+                        removeCounter = 1;
                         /*
                             I set a '-' delimiter between blocks of text that don't have a space but are
                             made of different numbers in order to separate individual letters in the main
@@ -162,7 +161,6 @@ namespace T9Texting
                             It's also easier to program because I'd have to mix quite a bit of logic together
                             To Achieve it in that way, at least with my current implementation.
                         */
-                        // Console.Write("-");
                         words += currentString;
                     } else if (currentString == ""){
                         // In case someone tries to send an empty text, this is how it would be handled.
@@ -206,30 +204,32 @@ namespace T9Texting
                     break;
                 }                
             }
-            string[] data = {words, currentNumBeingUsed};
+            string[] data = {words.Trim(), currentNumBeingUsed};
             return data;
         }
 
         static string SplitAndCheckText(string[] text, string delimiter, Dictionary<string, string> letterMappings){
             string newText = "";
             foreach(string input in text){
+                // Console.WriteLine($"INPUT: {input}");
                 string[] letterNums = input.Split("-");
-                if (letterNums.Length < input.Length){
-                    // if letterNums.Length < input.Length then theere was at least 1 '-'
+                if (letterNums.Length > 1){
                     foreach(string numSet in letterNums){
-                        try {
-                            newText += letterMappings[numSet.Trim()];
+                        try{
+                            newText += letterMappings[numSet];  
                         } catch {
-                            Console.WriteLine("In Top Catch");
+                            if (numSet != " " && numSet != "*" && numSet != "  "){
                             Globals.Unaccepted(numSet);
+                        }
                         }
                     }
                 } else {
                     try {
-                        newText += letterMappings[input.Trim()];
+                        newText += letterMappings[input];
                     } catch {
-                        Console.WriteLine("In Bottom Catch");
-                        Globals.Unaccepted(input);
+                        if (input != " " && input != "*" && input != "  "){
+                            Globals.Unaccepted(input);
+                        }
                         continue;
                     }
                     
