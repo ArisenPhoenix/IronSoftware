@@ -1,4 +1,5 @@
-﻿public static class Globals {
+﻿
+public static class Globals {
     public static string msg = "Please Provide Your T9 Input: ";
 
     public static void Unaccepted(string text){
@@ -13,15 +14,14 @@
 
 namespace T9Texting
 {
-    class Program2
+    class Program
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Enter T9 Text:");
             var letterMappings = new Dictionary<string,string>(){
                 // This was created to simplify my life. It's easily understood what it is, doesn't take up much
-                // memory and makes it easy to fetch values from so long as they are properly cleaned.
-                // It does take a little bit of upfront time though.
+                // memory and makes it easy to fetch values from, so long as the keys are properly cleaned.
                 {"1", "&"}, {"11", "&"}, {"111", "("},
                 {"2", "a"}, {"22", "b"}, {"222", "c"},
                 {"3", "d"}, {"33", "e"}, {"333", "f"},
@@ -119,7 +119,12 @@ namespace T9Texting
                 char currentChar = Console.ReadKey().KeyChar;
                 if (currentChar == 'x' || currentChar =='X'){
                     string[] exiting = {"", "null"};
+                    timer.Dispose();
                     return exiting;
+                }
+
+                if (char.IsLetter(currentChar)){
+                    continue;
                 }
                 
                 if (timer.Enabled){
@@ -136,10 +141,10 @@ namespace T9Texting
                     bool numberHasntChanged = currentString == currentNumBeingUsed;
                     bool numberHasChanged = !numberHasntChanged;
                     /* 
-                        I don't like using inverse boolean logic because it's more difficult for me to
-                        read and understand so I just created the inverse of the inverse in 
-                        order to make the control flow below more easily understandable.
-
+                        I don't like using CounterIntuitive boolean logic because it's more 
+                        difficult for me to read and understand so I just created the 
+                        inverse of the inverse in order to make the control flow below more 
+                        easily understandable.
                     */
 
                     if (numberHasChanged && currentNumBeingUsed != ""){
@@ -163,7 +168,7 @@ namespace T9Texting
                         */
                         words += currentString;
                     } else if (currentString == ""){
-                        // In case someone tries to send an empty text, this is how it would be handled.
+                        // In case someone tries to send in empty text, this is how it would be handled.
                         break;
                     } else {
                         words += currentString;
@@ -204,6 +209,7 @@ namespace T9Texting
                     break;
                 }                
             }
+            timer.Dispose();
             string[] data = {words.Trim(), currentNumBeingUsed};
             return data;
         }
@@ -211,11 +217,11 @@ namespace T9Texting
         static string SplitAndCheckText(string[] text, string delimiter, Dictionary<string, string> letterMappings){
             string newText = "";
             foreach(string input in text){
-                // Console.WriteLine($"INPUT: {input}");
                 string[] letterNums = input.Split("-");
                 if (letterNums.Length > 1){
                     foreach(string numSet in letterNums){
                         try{
+                            // Trying because there may be a key not found error
                             newText += letterMappings[numSet];  
                         } catch {
                             if (numSet != " " && numSet != "*" && numSet != "  "){
@@ -232,20 +238,9 @@ namespace T9Texting
                         }
                         continue;
                     }
-                    
                 }  
             };
             return newText;
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
