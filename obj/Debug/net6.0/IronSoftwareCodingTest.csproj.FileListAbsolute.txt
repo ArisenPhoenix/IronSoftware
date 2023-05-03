@@ -1,0 +1,15 @@
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/bin/Debug/net6.0/IronSoftwareCodingTest
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/bin/Debug/net6.0/IronSoftwareCodingTest.deps.json
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/bin/Debug/net6.0/IronSoftwareCodingTest.runtimeconfig.json
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/bin/Debug/net6.0/IronSoftwareCodingTest.dll
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/bin/Debug/net6.0/ref/IronSoftwareCodingTest.dll
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/bin/Debug/net6.0/IronSoftwareCodingTest.pdb
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/obj/Debug/net6.0/IronSoftwareCodingTest.csproj.AssemblyReference.cache
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/obj/Debug/net6.0/IronSoftwareCodingTest.GeneratedMSBuildEditorConfig.editorconfig
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/obj/Debug/net6.0/IronSoftwareCodingTest.AssemblyInfoInputs.cache
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/obj/Debug/net6.0/IronSoftwareCodingTest.AssemblyInfo.cs
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/obj/Debug/net6.0/IronSoftwareCodingTest.csproj.CoreCompileInputs.cache
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/obj/Debug/net6.0/IronSoftwareCodingTest.dll
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/obj/Debug/net6.0/ref/IronSoftwareCodingTest.dll
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/obj/Debug/net6.0/IronSoftwareCodingTest.pdb
+/home/merk/PROGRAMMING/C#/IronSoftwareCodingTest/obj/Debug/net6.0/IronSoftwareCodingTest.genruntimeconfig.cache
