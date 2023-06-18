@@ -1,18 +1,18 @@
-# Iron Software Test
+<h1 style="text-align:center">Iron Software Test</h1>
 
-## Old T9 on Phone Thoughts
+## Functionality: Requires One To Type From A Keyboard In The T9 Method, Meaning You Are Actually Using Numbers, Not Letters To Generate Text.
 
-### This was the first time ever looking at or creating something using c#
+### NOTES: 
+- This Is A Console Application
+- I had never used C# before but I got it done in about 6 hours by looking for syntax etc. online
+- I had taken a C++ Course For Credits Before So It Wasn't A Terrible Difference
+- I learned that C# is much easier to comprehend than Java
+- The understanding necessary was basic in terms of general programming
 
 
-* This Project was made with some amount of user experience in mind
-
-* The understanding necessary was basic in terms of general programming
-
-* The amount necessary to learn about c# was a decent amount actually. But I am no longer of the mind that c# should be avoided. It's not too difficult to work with like Java is.
+### This was the first time ever looking at or creating something using c# so I can't tell you much more than using it in general and compiling is just a matter of adding options to the compiler.
 
 ## About The Project
-* This is a console application, as it is not a functional programming style like one would do with a GUI it could be a bit haphazard at times.
 
 * The application was made under the .NET version 6.0.16 so if you plan to run it I would recommend using that unless later versions are backwards compatible.
 
